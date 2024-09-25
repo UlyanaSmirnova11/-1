@@ -1,0 +1,106 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <limits>
+
+using namespace std;
+
+string listNums(int x) {
+    stringstream result;
+    for (int i = 0; i <= x; i++) {
+        result << i << " ";
+    }
+    return result.str();
+}
+
+string reverseListNums(int x) {
+    stringstream result;
+    for (int i = x; i >= 0; i--) {
+        result << i << " ";
+    }
+    return result.str();
+}
+
+int power(int x, int y) {
+    if (y < 0) return 0; // Для отрицательной степени
+    int result = 1;
+    for (int i = 0; i < y; i++) {
+        result *= x;
+    }
+    return result;
+}
+
+bool equalNum(int x) {
+    if (x < 10 && x >= 0) return true; // Если всего одна цифра
+    int lastDigit = x % 10;
+    while (x > 0) {
+        if (x % 10 != lastDigit) {
+            return false;
+        }
+        x /= 10;
+    }
+    return true;
+}
+
+void square(int x) {
+    if (x <= 0) {
+        cout << "Размер квадрата должен быть положительным." << endl;
+        return;
+    }
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < x; j++) {
+            cout << "*";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int choice;
+    while (true) {
+        cout << "Выберите задачу (1-5) или 0 для выхода: ";
+        cin >> choice;
+
+        // Проверка ввода
+        if (cin.fail() || choice < 0 || choice > 5) {
+            cout << "Неверный ввод. Пожалуйста, введите число от 0 до 5." << endl;
+            cin.clear(); // очистить флаг ошибки
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // игнорировать неправильный ввод
+            continue;
+        }
+
+        if (choice == 0) {
+            break;
+        }
+
+        int x, y;
+        switch (choice) {
+            case 1:
+                cout << "Введите целое число для задачи 1: ";
+                cin >> x;
+                cout << listNums(x) << endl;
+                break;
+            case 2:
+                cout << "Введите целое число для задачи 2: ";
+                cin >> x;
+                cout << reverseListNums(x) << endl;
+                break;
+            case 3:
+                cout << "Введите основание (x) и степень (y) для задачи 3: ";
+                cin >> x >> y;
+                cout << power(x, y) << endl;
+                break;
+            case 4:
+                cout << "Введите целое число для задачи 4: ";
+                cin >> x;
+                cout << (equalNum(x) ? "true" : "false") << endl;
+                break;
+            case 5:
+                cout << "Введите целое число для задачи 5: ";
+                cin >> x;
+                square(x);
+                break;
+        }
+    }
+    return 0;
+}
