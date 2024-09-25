@@ -16,7 +16,7 @@ double safeDiv(int x, int y) {
 
 // Функция проверки, является ли число x либо кратным 3, либо кратным 5, но не кратным и тому, и другому
 bool is35(int x) {
-    return (x % 3 == 0 || x % 5 == 0) && !(x % 3 == 0 && x % 5 == 0); // Проверяет кратность
+    return (x % 3 == 0 || x % 5 == 0) && !(x % 3 == 0 && x % 5 == 0); 
 }
 
 // Функция, возвращающая максимальное из трех чисел
@@ -36,19 +36,19 @@ bool isValidInput(const string &input) {
             return false; 
         }
     }
-    return true; // Ввод корректен
+    return true; 
 }
 
 int main() {
     int choice;
 
-    // Основной цикл программы
+    
     while (true) {
         cout << "Выберите задачу (1-5) или 0 для выхода: ";
         cin >> choice;
 
         if (choice == 0) {
-            break; // Выход из цикла
+            break; 
         }
 
         switch (choice) {
@@ -57,11 +57,11 @@ int main() {
                 cout << "Введите число: ";
                 cin >> input;
                 if (!isValidInput(input)) {
-                    cout << "Неверный ввод." << endl; // Проверка ввода
+                    cout << "Неверный ввод." << endl; 
                     break;
                 }
                 int x = stoi(input); // Преобразование строки в целое число
-                cout << "Модуль числа: " << abs(x) << endl; // Вывод результата
+                cout << "Модуль числа: " << abs(x) << endl; 
                 break;
             }
             case 2: { // Задача 2: безопасное деление
@@ -71,12 +71,12 @@ int main() {
                 cout << "Введите делитель: ";
                 cin >> inputY;
                 if (!isValidInput(inputX) || !isValidInput(inputY)) {
-                    cout << "Неверный ввод." << endl; // Проверка ввода
+                    cout << "Неверный ввод." << endl; 
                     break;
                 }
                 int x = stoi(inputX);
                 int y = stoi(inputY);
-                cout << "Результат безопасного деления: " << safeDiv(x, y) << endl; // Вывод результата
+                cout << "Результат безопасного деления: " << safeDiv(x, y) << endl; 
                 break;
             }
             case 3: { // Задача 3: проверка на кратность
@@ -84,11 +84,11 @@ int main() {
                 cout << "Введите число: ";
                 cin >> input;
                 if (!isValidInput(input)) {
-                    cout << "Неверный ввод." << endl; // Проверка ввода
+                    cout << "Неверный ввод." << endl; 
                     break;
                 }
                 int x = stoi(input); // Преобразование строки в целое число
-                cout << "Результат проверки: " << (is35(x) ? "true" : "false") << endl; // Вывод результата
+                cout << "Результат проверки: " << (is35(x) ? "true" : "false") << endl; 
                 break;
             }
             case 4: { // Задача 4: нахождение максимума
@@ -96,13 +96,13 @@ int main() {
                 cout << "Введите три числа: ";
                 cin >> inputX >> inputY >> inputZ;
                 if (!isValidInput(inputX) || !isValidInput(inputY) || !isValidInput(inputZ)) {
-                    cout << "Неверный ввод." << endl; // Проверка ввода
+                    cout << "Неверный ввод." << endl; 
                     break;
                 }
                 int x = stoi(inputX);
                 int y = stoi(inputY);
                 int z = stoi(inputZ);
-                cout << "Максимальное число: " << max3(x, y, z) << endl; // Вывод результата
+                cout << "Максимальное число: " << max3(x, y, z) << endl; 
                 break;
             }
             case 5: { // Задача 5: проверка суммы
@@ -110,20 +110,20 @@ int main() {
                 cout << "Введите три числа: ";
                 cin >> inputX >> inputY >> inputZ;
                 if (!isValidInput(inputX) || !isValidInput(inputY) || !isValidInput(inputZ)) {
-                    cout << "Неверный ввод." << endl; // Проверка ввода
+                    cout << "Неверный ввод." << endl; 
                     break;
                 }
                 int x = stoi(inputX);
                 int y = stoi(inputY);
                 int z = stoi(inputZ);
-                cout << "Результат проверки: " << (sum3(x, y, z) ? "true" : "false") << endl; // Вывод результата
+                cout << "Результат проверки: " << (sum3(x, y, z) ? "true" : "false") << endl; 
                 break;
             }
             default:
-                cout << "Выберите корректный вариант." << endl; // Недопустимый выбор
+                cout << "Выберите корректный вариант." << endl; 
                 break;
         }
     }
     
-    return 0; // Завершение программы
+    return 0; 
 }
