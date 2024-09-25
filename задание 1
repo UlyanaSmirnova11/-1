@@ -1,0 +1,121 @@
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+// Функция для проверки ввода
+bool inputCheck(int &x) {
+    cin >> x;
+    if(cin.fail()) {
+        cin.clear(); // очистка состояния ошибки
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // игнорирование оставшихся символов в буфере
+        return false;
+    }
+    return true;
+}
+
+// 1. Функция для сложения двух последних цифр числа
+int sumLastNums(int x) {
+    x = abs(x);
+    return x < 10 ? -1 : (x % 10) + ((x / 10) % 10);
+}
+
+
+// 2. Функция для проверки положительности числа
+bool isPositive(int x) {
+    return x > 0;
+}
+
+// 3. Функция для проверки двузначности числа
+bool is2Digits(int x) {
+    return (x >= 10 && x <= 99) || (x <= -10 && x >= -99);
+}
+
+
+// 4. Функция для проверки попадания числа в диапазон
+bool isInRange(int a, int b, int num) {
+    return (a <= num && b >= num) || (b <= num && a >= num);
+}
+
+// 5. Функция для проверки делимости
+bool isDivisor(int a, int b) {
+    return (a != 0 && b % a == 0) || (b != 0 && a % b == 0);
+}
+
+int main() {
+    int choice;
+    
+    while (true) {
+        cout << "Выберите задачу (1-5) или 0 для выхода: ";
+        
+        if (!inputCheck(choice)) {
+            cout << "Неверный ввод." << endl;
+            continue;
+        }
+
+        if (choice == 0) {
+            break; // выход из цикла
+        }
+
+        switch (choice) {
+            case 1: {
+                int x;
+                cout << "Введите число: ";
+                if (!inputCheck(x)) {
+                    cout << "Неверный ввод." << endl;
+                    break;
+                }
+                int result = sumLastNums(x);
+                if (result != -1) {
+                    cout << "Сумма двух последних цифр: " << result << endl;
+                }
+                break;
+            }
+            case 2: {
+                int x;
+                cout << "Введите число: ";
+                if (!inputCheck(x)) {
+                    cout << "Неверный ввод." << endl;
+                    break;
+                }
+                cout << "Результат: " << (isPositive(x) ? "true" : "false") << endl;
+                break;
+            }
+            case 3: {
+                int x;
+                cout << "Введите число: ";
+                if (!inputCheck(x)) {
+                    cout << "Неверный ввод." << endl;
+                    break;
+                }
+                cout << "Результат: " << (is2Digits(x) ? "true" : "false") << endl;
+                break;
+            }
+            case 4: {
+                int a, b, num;
+                cout << "Введите левую границу (a), правую границу (b) и число (num): ";
+                if (!inputCheck(a) || !inputCheck(b) || !inputCheck(num)) {
+                    cout << "Неверный ввод." << endl;
+                    break;
+                }
+                cout << "Результат: " << (isInRange(a, b, num) ? "true" : "false") << endl;
+                break;
+            }
+            case 5: {
+                int a, b;
+                cout << "Введите два целых числа (a и b): ";
+                if (!inputCheck(a) || !inputCheck(b)) {
+                    cout << "Неверный ввод." << endl;
+                    break;
+                }
+                cout << "Результат: " << (isDivisor(a, b) ? "true" : "false") << endl;
+                break;
+            }
+            default:
+                cout << "Неверный выбор задачи." << endl;
+                break;
+        }
+    }
+
+    return 0;
+}
