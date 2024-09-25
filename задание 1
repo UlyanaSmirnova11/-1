@@ -17,9 +17,11 @@ bool inputCheck(int &x) {
 // 1. Функция для сложения двух последних цифр числа
 int sumLastNums(int x) {
     x = abs(x);
-    return x < 10 ? -1 : (x % 10) + ((x / 10) % 10);
+    if (x < 10) {
+        return -2; // Вернём специальный код для неверного ввода (менее двух знаков)
+    }
+    return (x % 10) + ((x / 10) % 10);
 }
-
 
 // 2. Функция для проверки положительности числа
 bool isPositive(int x) {
@@ -30,7 +32,6 @@ bool isPositive(int x) {
 bool is2Digits(int x) {
     return (x >= 10 && x <= 99) || (x <= -10 && x >= -99);
 }
-
 
 // 4. Функция для проверки попадания числа в диапазон
 bool isInRange(int a, int b, int num) {
@@ -44,10 +45,10 @@ bool isDivisor(int a, int b) {
 
 int main() {
     int choice;
-    
+
     while (true) {
         cout << "Выберите задачу (1-5) или 0 для выхода: ";
-        
+
         if (!inputCheck(choice)) {
             cout << "Неверный ввод." << endl;
             continue;
@@ -66,7 +67,9 @@ int main() {
                     break;
                 }
                 int result = sumLastNums(x);
-                if (result != -1) {
+                if (result == -2) {
+                    cout << "Неверный ввод: число должно содержать хотя бы две цифры." << endl;
+                } else {
                     cout << "Сумма двух последних цифр: " << result << endl;
                 }
                 break;
