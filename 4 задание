@@ -1,0 +1,235 @@
+#include <iostream>
+#include <vector>
+#include <limits>
+#include <cstdlib> // Для использования abs
+
+using namespace std;
+
+int findFirst(int arr[], int size, int x) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == x) {
+            return i; // Возвращаем индекс первого вхождения
+        }
+    }
+    return -1; // 
+}
+
+int maxAbs(int arr[], int size) {
+    int max_abs = abs(arr[0]); // Инициализируем с первым элементом
+    for (int i = 1; i < size; i++) {
+        if (abs(arr[i]) > max_abs) {
+            max_abs = abs(arr[i]);
+        }
+    }
+    return max_abs; // Возвращаем наибольшее по модулю значение
+}
+
+int* add(int arr[], int size, int x, int pos) {
+    int* newArr = new int[size + 1]; // Создаем новый массив с размером на 1 больше
+    for (int i = 0; i < pos; i++) {
+        newArr[i] = arr[i]; // Копируем элементы до позиции
+    }
+    newArr[pos] = x; // Вставляем новый элемент
+    for (int i = pos; i < size; i++) {
+        newArr[i + 1] = arr[i]; // Копируем оставшиеся элементы
+    }
+    return newArr; // Возвращаем новый массив
+}
+
+int* add(int arr[], int size, int ins[], int insSize, int pos) {
+    int* newArr = new int[size + insSize]; // Создаем новый массив с размером на insSize больше
+    for (int i = 0; i < pos; i++) {
+        newArr[i] = arr[i]; // Копируем элементы до позиции
+    }
+    for (int i = 0; i < insSize; i++) {
+        newArr[pos + i] = ins[i]; // Вставляем элементы из ins
+    }
+    for (int i = pos; i < size; i++) {
+        newArr[i + insSize] = arr[i]; // Копируем оставшиеся элементы
+    }
+    return newArr; // Возвращаем новый массив
+}
+
+int* reverseBack(int arr[], int size) {
+    int* newArr = new int[size]; // Создаем новый массив
+    for (int i = 0; i < size; i++) {
+        newArr[i] = arr[size - 1 - i]; // Заполняем его задом наперёд
+    }
+    return newArr; 
+}
+
+void inputArray(int* arr, int size) {
+    for (int i = 0; i < size; i++) {
+        while (true) {
+            cout << "Введите элемент " << i << ": ";
+            cin >> arr[i];а
+            if (cin.fail()) {
+                cin.clear(); 
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Пропускаем неверный ввод
+                cout << "Неверный ввод. Попробуйте снова." << endl;
+            } else {
+                break; 
+            }
+        }
+    }
+}
+
+int main() {
+    int choice;
+
+    while (true) {
+        cout << "Выберите задачу (1-5) или 0 для завершения: ";
+        cin >> choice;
+
+        if (cin.fail() || choice < 0 || choice > 5) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Неверный ввод. Попробуйте снова." << endl;
+            continue; 
+        }
+
+        if (choice == 0) break; 
+
+        switch (choice) {
+            case 1: {
+                int size;
+                while (true) { // Добавляем цикл для корректного ввода размера массива
+                    cout << "Введите размер массива: ";
+                    cin >> size;
+                    if (!cin.fail() && size > 0) break; // Проверка на корректный ввод
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Размер массива неккоректный. Попробуйте снова." << endl;
+                }
+
+                int* arr = new int[size];
+                inputArray(arr, size);
+                int x;
+                cout << "Введите число для поиска: ";
+                cin >> x;
+                int index = findFirst(arr, size, x);
+                cout << "Индекс первого вхождения: " << index << endl;
+                delete[] arr;
+                break;
+            }
+            case 2: {
+                int size;
+                while (true) { // Цикл для ввода размера массива
+                    cout << "Введите размер массива: ";
+                    cin >> size;
+                    if (!cin.fail() && size > 0) break; // Проверка на корректный ввод
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Размер массива неккоректный. Попробуйте снова." << endl;
+                }
+
+                int* arr = new int[size];
+                inputArray(arr, size);
+                int max_abs_value = maxAbs(arr, size);
+                cout << "Максимальное по модулю значение: " << max_abs_value << endl;
+                delete[] arr;
+                break;
+            }
+            case 3: {
+                int size, x, pos;
+                while (true) { // Цикл для ввода размера массива
+                    cout << "Введите размер массива: ";
+                    cin >> size;
+                    if (!cin.fail() && size > 0) break; // Проверка на корректный ввод
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Размер массива неккоректный. Попробуйте снова." << endl;
+                }
+
+                int* arr = new int[size];
+                inputArray(arr, size);
+                cout << "Введите значение для вставки: ";
+                cin >> x;
+                cout << "Введите позицию для вставки: ";
+                cin >> pos;
+                if (pos < 0 || pos > size) {
+                    cout << "Некорректная позиция." << endl;
+                    delete[] arr;
+                    break;
+                }
+                int* newArr = add(arr, size, x, pos);
+                cout << "Новый массив: ";
+                for (int i = 0; i < size + 1; i++) {
+                    cout << newArr[i] << " ";
+                }
+                cout << endl;
+                delete[] arr;
+                delete[] newArr;
+                break;
+            }
+            case 4: {
+                int size, insSize, pos;
+                while (true) { // Цикл для ввода размера первого массива
+                    cout << "Введите размер первого массива: ";
+                    cin >> size;
+                    if (!cin.fail() && size > 0) break; // Проверка на корректный ввод
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Размер массива неккоректный. Попробуйте снова." << endl;
+                }
+
+                int* arr = new int[size];
+                inputArray(arr, size);
+                while (true) { // Цикл для ввода размера второго массива
+                    cout << "Введите размер второго массива: ";
+                    cin >> insSize;
+                    if (!cin.fail() && insSize > 0) break; // Проверка на корректный ввод
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Размер массива неккоректный. Попробуйте снова." << endl;
+                }
+
+                int* ins = new int[insSize];
+                inputArray(ins, insSize);
+                cout << "Введите позицию для вставки: ";
+                cin >> pos;
+                if (pos < 0 || pos > size) {
+                    cout << "Некорректная позиция." << endl;
+                    delete[] arr;
+                    delete[] ins;
+                    break;
+                }
+                int* newArr = add(arr, size, ins, insSize, pos);
+                cout << "Новый массив: ";
+                for (int i = 0; i < size + insSize; i++) {
+                    cout << newArr[i] << " ";
+                }
+                cout << endl;
+                delete[] arr;
+                delete[] ins;
+                delete[] newArr;
+                break;
+            }
+            case 5: {
+                int size;
+                while (true) { // Цикл для ввода размера массива
+                    cout << "Введите размер массива: ";
+                    cin >> size;
+                    if (!cin.fail() && size > 0) break; // Проверка на корректный ввод
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Размер массива неккоректный. Попробуйте снова." << endl;
+                }
+
+                int* arr = new int[size];
+                inputArray(arr, size);
+                int* newArr = reverseBack(arr, size);
+                cout << "Реверсированный массив: ";
+                for (int i = 0; i < size; i++) {
+                    cout << newArr[i] << " ";
+                }
+                cout << endl;
+                delete[] arr;
+                delete[] newArr;
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
