@@ -121,6 +121,11 @@ bool isValidName(const string& name) {
     return regex_match(name, pattern); // Возвращаем результат проверки
 }
 
+// Проверка на валидность оценки
+bool isValidGrade(int grade) {
+    return grade >= 2 && grade <= 5;
+}
+
 // Главное меню
 void menu() {
     cout << "Выберите задачу (1-6):\n";
@@ -282,10 +287,15 @@ int main() {
                 }
 
                 vector<int> grades(3); // Вектор для хранения оценок студента
-                cout << "Введите 3 оценки для " << name << ": "; 
+                cout << "Введите 3 оценки для " << name << ". "; 
                 for (int i = 0; i < 3; i++) { 
-                    grades[i] = inputInteger(); 
+                    do {
+                        cout << "Оценка " << (i + 1) << " для " << name << " (от 2 до 5): ";
+                        grades[i] = inputInteger();
+                    } while (!isValidGrade(grades[i])); // Проверяем каждую оценку
                 }
+                
+
                 Student studentWithGrades(name, grades); // Создаем студента с введенным именем и оценками
                 cout << studentWithGrades.print() << endl; // Выводим информацию о созданном студенте
 
@@ -322,10 +332,14 @@ int main() {
                 }
 
                 vector<int> firstGrades(4); // Оценки для первого студента
-                cout << "Введите 4 оценки для " << firstName << ": ";
-                for (int i = 0; i < 4; i++) { // Цикл для ввода оценок
-                    firstGrades[i] = inputInteger(); 
+                cout << "Введите 4 оценки для " << firstName << ". ";
+                for (int i = 0; i < 4; i++) {
+                    do {
+                        cout << "Оценка " << (i + 1) << " для " << firstName << " (от 2 до 5): ";
+                        firstGrades[i] = inputInteger();
+                    } while (!isValidGrade(firstGrades[i])); // Проверяем каждую оценку
                 }
+               
                 Student firstStudent(firstName, firstGrades); // Создаем первого студента
 
                
@@ -341,9 +355,12 @@ int main() {
                 }
 
                 vector<int> secondGrades(4); 
-                cout << "Введите 4 оценки для " << secondName << ": "; 
-                for (int i = 0; i < 4; i++) { // Цикл для ввода оценок
-                    secondGrades[i] = inputInteger(); // Получаем каждую оценку
+                cout << "Введите 4 оценки для " << secondName << ". "; 
+                for (int i = 0; i < 4; i++) { 
+                    do {
+                        cout << "Оценка " << (i + 1) << " для " << secondName << " (от 2 до 5): ";
+                        secondGrades[i] = inputInteger();
+                    } while (!isValidGrade(secondGrades[i])); // Проверяем каждую оценку
                 }
                 Student secondStudent(secondName, secondGrades); // Создаем второго студента
 
