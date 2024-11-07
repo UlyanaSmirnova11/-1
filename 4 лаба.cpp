@@ -132,10 +132,10 @@ int main() {
                 std::cout << "Координаты после перестановки: " << p << std::endl; 
                 break;
             case 3: // Получить целую часть координаты x
-                std::cout << "Координата x как int: " << static_cast<int>(p) << std::endl; // Приводим x к типу int и выводим
+                std::cout << "Целая часть координаты x: " << static_cast<int>(p) << std::endl; // Приводим x к типу int и выводим
                 break;
             case 4: // Получить координату y
-                std::cout << "Координата y как double: " << static_cast<double>(p) << std::endl; // Приводим y к типу double и выводим
+                std::cout << "Координата y: " << static_cast<double>(p) << std::endl; // Приводим y к типу double и выводим
                 break;
             case 5: { // Уменьшить x на целое число
                 int value; // Переменная для хранения введенного числа
