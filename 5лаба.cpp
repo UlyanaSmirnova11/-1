@@ -45,7 +45,7 @@ public:
         Node* newNode = new Node{ data, nullptr }; 
         if (!head) { // Если список пуст
             head = newNode; // Новый узел становится первым
-        } else 
+        } else {
             Node* current = head; // Начинаем с первого узла
             while (current->next) { // Пока есть следующий узел
                 current = current->next; // Переходим к следующему узлу
@@ -170,7 +170,7 @@ public:
                 if (current->next) current->next->prev = current->prev; // Если есть следующий узел, обновляем его предыдущий указатель
                 if (current == tail) tail = current->prev; // Если текущий узел последний, обновляем указатель на последний узел
                 delete current; 
-                return true; //
+                return true; 
             }
             current = current->next; // Переходим к следующему узлу
         }
@@ -474,7 +474,7 @@ void task4() {
     ifstream file("4.txt"); 
     if (!file.is_open()) { 
         cout << "Ошибка открытия файла 4.txt" << endl; 
-        return; /
+        return; 
     }
 
     string word; // Переменная для слова
@@ -559,6 +559,7 @@ int main() {
         while (!isNumber(input)) { 
             cout << "Ошибка: введено не число. Попробуйте снова: "; 
             cin >> input; 
+        }    
         choice = stoi(input); 
 
         switch (choice) { 
