@@ -470,11 +470,11 @@ void task3() {
 }
 
 // Задача 4: Алфавитный порядок символов в словах с четными номерами
-void task4() { 
-    ifstream file("4.txt"); 
-    if (!file.is_open()) { 
-        cout << "Ошибка открытия файла 4.txt" << endl; 
-        return; 
+void task4() {
+    ifstream file("4.txt");
+    if (!file.is_open()) {
+        cout << "Ошибка открытия файла 4.txt" << endl;
+        return;
     }
 
     string word; // Переменная для слова
@@ -482,22 +482,27 @@ void task4() {
     set<char> characters; // Множество для хранения уникальных символов
 
     while (file >> word) { // Пока есть слова в файле
-        if (wordNumber % 2 == 0) { 
+        if (wordNumber % 2 == 0) {
             for (char c : word) { // Проходим по символам слова
-                characters.insert(tolower(c)); // Добавляем символ в множество в нижнем регистре
+                if (isalpha(c)) { // Проверяем, является ли символ буквой
+                    characters.insert(tolower(c)); // Добавляем символ в множество в нижнем регистре
+                }
             }
         }
         wordNumber++; // Увеличиваем номер слова
     }
 
-    cout << "Символы, встречающиеся в словах с четными номерами (в алфавитном порядке):" << endl; 
+    cout << "Буквы, встречающиеся в словах с четными номерами (в алфавитном порядке):" << endl;
     for (char c : characters) { // Проходим по символам множества
-        cout << c << " "; 
+        cout << c << " ";
     }
-    cout << endl; 
+    cout << endl;
 
-    file.close(); 
+    file.close();
 }
+
+
+    
 
 // Задача 5: Абитуриенты, допущенные к экзаменам
 void task5() { 
